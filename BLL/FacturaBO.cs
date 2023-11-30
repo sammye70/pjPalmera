@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -636,7 +636,7 @@ namespace pjPalmera.BLL
         // Modificated by: Samuel Estrella
         //---------------------------------------------------------------------------------------------------------*/
         /// <summary>
-        /// Check Customer Line Credit before processing sell (OLd Method were replaced for other new)
+        /// Check Customer Line Credit before processing sell (OLd Method were remplaced for other new)
         /// </summary>  
         /// <returns></returns>
         public static bool CheckProcessCredit(VentaCrEntity crVenta)
