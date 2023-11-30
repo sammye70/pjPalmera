@@ -629,15 +629,15 @@ namespace pjPalmera.BLL
 
 
         /*----------------------------------------------------------------------------------------------------------
-        // Name: Check if customer has line credit amount avalible for process sell (Remplacement for other method)
+        // Name: Check if customer has line credit amount avalible for process sell ( remplaced for other method)
         // Created: 06/01/2021
         // Author: Samuel Estrella
         // Modificated date: 06/01/2021
         // Modificated by: Samuel Estrella
         //---------------------------------------------------------------------------------------------------------*/
         /// <summary>
-        /// Check Customer Line Credit before processing sell (OLd Method were remplement for other)
-        /// </summary>
+        /// Check Customer Line Credit before processing sell (OLd Method were replaced for other new)
+        /// </summary>  
         /// <returns></returns>
         public static bool CheckProcessCredit(VentaCrEntity crVenta)
         {
