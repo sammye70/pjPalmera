@@ -25,37 +25,71 @@ namespace pjPalmera.PL
         {
             CleanControls();
             DesableControls();
+            SetTooltipControls();
             this.btnNuevo.Focus();
         }
 
         /// <summary>
         /// Not Allow close the form
         /// </summary>
-        private const int CP_NOCLOSE_BUTTON = 0x200;
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams myCp = base.CreateParams;
-                myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
-                return myCp;
-            }
-        }
+        //private const int CP_NOCLOSE_BUTTON = 0x200;
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        CreateParams myCp = base.CreateParams;
+        //        myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
+        //        return myCp;
+        //    }
+        //}
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            try
+            var question = new DialogResult();
+            var name = this.txtNomProvincia.Text;
+
+            if (name == string.Empty)
             {
-                Newprovincia();
-                CleanControls();
-                DesableControls();
-                MessageBox.Show("Guardado Satisfactoriamente", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.btnNuevo.Focus();
+                MessageBox.Show("Ingrese un Nombre Válido", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.txtNomProvincia.Focus();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                var verify = ProvinciaBO.ExitsProvincia(name);
+
+                if (verify == false)
+                {
+                    question = MessageBox.Show("Seguro desea Guardar La Provincia indicada?", "Mensaje del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (question == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            Newprovincia();
+                            CleanControls();
+                            DesableControls();
+                            MessageBox.Show("Guardado Satisfactoriamente", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.btnNuevo.Focus();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            this.txtNomProvincia.Focus();
+                        }
+                    }
+                    else if (question == DialogResult.No)
+                    {
+                        this.txtNomProvincia.Focus();
+                        return;
+                    }
+                }
+                else if (verify == true)
+                {
+                    MessageBox.Show(ProvinciaBO.strMessage, "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.txtNomProvincia.Focus();
+                }
             }
+
 
         }
 
@@ -109,13 +143,18 @@ namespace pjPalmera.PL
         {
             toolTip1.SetToolTip(btnNuevo, "Nuevo Registro");
             toolTip1.SetToolTip(btnGuardar, "Guardar Registro");
-            toolTip1.SetToolTip(btnCancelar, "Limpiar Campos");
+          //  toolTip1.SetToolTip(btnCancelar, "Limpiar Campos");
         }
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             provincia = null;
             EnableControls();
             this.txtNomProvincia.Focus();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            CleanControls();
         }
     }
 }

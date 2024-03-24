@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtNombreCiudad = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // txtNombreCiudad
@@ -51,15 +52,6 @@
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 25;
             this.label2.Text = "Nombre";
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Image = global::PL.Properties.Resources.cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(292, 84);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 51);
-            this.btnCancelar.TabIndex = 29;
-            this.btnCancelar.UseVisualStyleBackColor = true;
             // 
             // btnGuardar
             // 
@@ -94,9 +86,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(386, 147);
-            this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.txtNombreCiudad);
@@ -113,9 +103,9 @@
         #endregion
         private System.Windows.Forms.TextBox txtNombreCiudad;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnNuevo;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

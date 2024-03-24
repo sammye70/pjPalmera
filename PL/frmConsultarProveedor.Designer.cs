@@ -28,96 +28,132 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.lblCriterioBuscar = new System.Windows.Forms.Label();
+            this.txtCriterioBuscar = new System.Windows.Forms.TextBox();
+            this.rbRnc = new System.Windows.Forms.RadioButton();
+            this.rbNomEmpresa = new System.Windows.Forms.RadioButton();
             this.dgvContProveedor = new System.Windows.Forms.DataGridView();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContProveedor)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lblCriterioBuscar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Label";
+            this.lblCriterioBuscar.AutoSize = true;
+            this.lblCriterioBuscar.Location = new System.Drawing.Point(12, 26);
+            this.lblCriterioBuscar.Name = "lblCriterioBuscar";
+            this.lblCriterioBuscar.Size = new System.Drawing.Size(33, 13);
+            this.lblCriterioBuscar.TabIndex = 0;
+            this.lblCriterioBuscar.Text = "Label";
             // 
-            // textBox1
+            // txtCriterioBuscar
             // 
-            this.textBox1.Location = new System.Drawing.Point(51, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(151, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtCriterioBuscar.Location = new System.Drawing.Point(68, 23);
+            this.txtCriterioBuscar.Name = "txtCriterioBuscar";
+            this.txtCriterioBuscar.Size = new System.Drawing.Size(151, 20);
+            this.txtCriterioBuscar.TabIndex = 1;
+            this.txtCriterioBuscar.TextChanged += new System.EventHandler(this.txtCriterioBuscar_TextChanged_1);
             // 
-            // radioButton1
+            // rbRnc
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(237, 26);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(48, 17);
-            this.radioButton1.TabIndex = 2;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "RNC";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbRnc.AutoSize = true;
+            this.rbRnc.Location = new System.Drawing.Point(256, 26);
+            this.rbRnc.Name = "rbRnc";
+            this.rbRnc.Size = new System.Drawing.Size(48, 17);
+            this.rbRnc.TabIndex = 2;
+            this.rbRnc.TabStop = true;
+            this.rbRnc.Text = "RNC";
+            this.rbRnc.UseVisualStyleBackColor = true;
+            this.rbRnc.CheckedChanged += new System.EventHandler(this.rbRnc_CheckedChanged);
             // 
-            // radioButton2
+            // rbNomEmpresa
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(352, 26);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(106, 17);
-            this.radioButton2.TabIndex = 3;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Nombre Empresa";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbNomEmpresa.AutoSize = true;
+            this.rbNomEmpresa.Location = new System.Drawing.Point(352, 26);
+            this.rbNomEmpresa.Name = "rbNomEmpresa";
+            this.rbNomEmpresa.Size = new System.Drawing.Size(114, 17);
+            this.rbNomEmpresa.TabIndex = 3;
+            this.rbNomEmpresa.TabStop = true;
+            this.rbNomEmpresa.Text = "Nombre Proveedor";
+            this.rbNomEmpresa.UseVisualStyleBackColor = true;
+            this.rbNomEmpresa.CheckedChanged += new System.EventHandler(this.rbNomEmpresa_CheckedChanged);
             // 
             // dgvContProveedor
             // 
-            this.dgvContProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvContProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvContProveedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvContProveedor.Location = new System.Drawing.Point(5, 62);
             this.dgvContProveedor.Name = "dgvContProveedor";
-            this.dgvContProveedor.Size = new System.Drawing.Size(694, 356);
+            this.dgvContProveedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvContProveedor.Size = new System.Drawing.Size(1038, 395);
             this.dgvContProveedor.TabIndex = 4;
             // 
-            // btnCancelar
+            // btnEditar
             // 
-            this.btnCancelar.Image = global::PL.Properties.Resources.cancel1;
-            this.btnCancelar.Location = new System.Drawing.Point(578, 11);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(56, 43);
-            this.btnCancelar.TabIndex = 10;
-            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnEditar.Image = global::PL.Properties.Resources.edit;
+            this.btnEditar.Location = new System.Drawing.Point(578, 11);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(56, 43);
+            this.btnEditar.TabIndex = 10;
+            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Visible = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
-            // button1
+            // btnBuscar
             // 
-            this.button1.Image = global::PL.Properties.Resources.search;
-            this.button1.Location = new System.Drawing.Point(516, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(56, 43);
-            this.button1.TabIndex = 9;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnBuscar.Image = global::PL.Properties.Resources.search;
+            this.btnBuscar.Location = new System.Drawing.Point(516, 11);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(56, 43);
+            this.btnBuscar.TabIndex = 9;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Visible = false;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Image = global::PL.Properties.Resources.trash;
+            this.btnEliminar.Location = new System.Drawing.Point(640, 11);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(56, 43);
+            this.btnEliminar.TabIndex = 11;
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Visible = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = global::PL.Properties.Resources.refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(702, 12);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(56, 43);
+            this.btnRefresh.TabIndex = 12;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Visible = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // frmConsultarProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(711, 430);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1055, 469);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnEditar);
+            this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.dgvContProveedor);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.rbNomEmpresa);
+            this.Controls.Add(this.rbRnc);
+            this.Controls.Add(this.txtCriterioBuscar);
+            this.Controls.Add(this.lblCriterioBuscar);
             this.Name = "frmConsultarProveedor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consultar Proveedor";
+            this.Activated += new System.EventHandler(this.frmConsultarProveedor_Activated);
             this.Load += new System.EventHandler(this.frmConsultarProveedor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvContProveedor)).EndInit();
             this.ResumeLayout(false);
@@ -127,12 +163,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.DataGridView dgvContProveedor;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblCriterioBuscar;
+        private System.Windows.Forms.TextBox txtCriterioBuscar;
+        private System.Windows.Forms.RadioButton rbRnc;
+        private System.Windows.Forms.RadioButton rbNomEmpresa;
+        private System.Windows.Forms.Button btnBuscar;
+        public System.Windows.Forms.Button btnEliminar;
+        public System.Windows.Forms.Button btnEditar;
+        public System.Windows.Forms.DataGridView dgvContProveedor;
+        public System.Windows.Forms.Button btnRefresh;
     }
 }

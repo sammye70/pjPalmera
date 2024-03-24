@@ -15,6 +15,7 @@ namespace pjPalmera.PL
     public partial class frmRegProveedor : Form
     {
         ProveedorEntity proveedor = null;
+        frmConsultarProveedor cProveedor = new frmConsultarProveedor();
 
         public frmRegProveedor()
         {
@@ -27,6 +28,7 @@ namespace pjPalmera.PL
             SetTooltipControls();
             CleanControls();
             DesableControls();
+            InizatationControls();
             this.btnNuevo.Focus();
         }
 
@@ -37,7 +39,7 @@ namespace pjPalmera.PL
                 NewProveedor();
                 CleanControls();
                 DesableControls();
-                MessageBox.Show("Guardado Satisfactoriamente","Mensaje del Sistema",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                
             }
             catch (Exception ex)
             {
@@ -60,6 +62,18 @@ namespace pjPalmera.PL
             this.Close();
         }
 
+
+        /// <summary>
+        /// Hide Controls from EditProveedor
+        /// </summary>
+        public void IniControls()
+        {
+            this.btnNuevo.Visible = false;
+            this.btnGuardar.Visible = false;
+            this.btnUpdate.Visible = true;
+        }
+
+
         /// <summary>
         /// Clean Content in the Controls
         /// </summary>
@@ -71,9 +85,44 @@ namespace pjPalmera.PL
             this.mktTelefRepresentante.Text = "";
             this.txtNomRepresentante.Text = "";
             this.mktLimiteCredito.Text = "";
-            this.mktTelefono.Text = "";
+            this.mktTelefono.Mask = "###-###-####";
+            this.mktTelefRepresentante.Mask = "###-###-####";
             this.mktTelefRepresentante.Text = "";
+            this.mktTelefono.Text = "";
             this.cmbCredito.Text = "";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InizatationControls()
+        {
+
+            //Mask
+            this.mktTelefono.Mask = "###-###-####";
+            this.mktTelefRepresentante.Mask = "###-###-####";
+
+            //BackColor
+            this.txtDirProveedor.BackColor = Color.Bisque;
+            this.txtNomProveedor.BackColor = Color.Bisque;
+            this.txtNomRepresentante.BackColor = Color.Bisque;
+            this.cmbCredito.BackColor = Color.Bisque;
+            this.mktLimiteCredito.BackColor = Color.Bisque;
+            this.mktTelefono.BackColor = Color.Bisque;
+            this.mktTelefRepresentante.BackColor = Color.Bisque;
+            this.txtRnc.BackColor = Color.Bisque;
+
+            //ForeColor
+            this.txtDirProveedor.ForeColor = Color.Maroon;
+            this.txtNomProveedor.ForeColor = Color.Maroon;
+            this.txtNomRepresentante.ForeColor = Color.Maroon;
+            this.cmbCredito.ForeColor = Color.Maroon;
+            this.mktLimiteCredito.ForeColor = Color.Maroon;
+            this.mktTelefono.ForeColor = Color.Maroon;
+            this.mktTelefRepresentante.ForeColor = Color.Maroon;
+            this.txtRnc.ForeColor = Color.Maroon;
+
+
         }
 
         /// <summary>
@@ -91,20 +140,21 @@ namespace pjPalmera.PL
             this.mktTelefRepresentante.Enabled = false;
             this.cmbCredito.Enabled = false;
             this.btnGuardar.Enabled = false;
+            this.btnUpdate.Visible = false;
            // this.btnCancelar.Enabled = false;
         }
 
         /// <summary>
         /// Enable all Controls
         /// </summary>
-        private void EnableControls()
+        public void EnableControls()
         {
             this.txtRnc.Enabled = true;
             this.txtDirProveedor.Enabled = true;
             this.txtNomProveedor.Enabled = true;
             this.mktTelefRepresentante.Enabled = true;
             this.txtNomRepresentante.Enabled = true;
-            this.mktLimiteCredito.Enabled = true;
+            //this.mktLimiteCredito.Enabled = true;
             this.mktTelefono.Enabled = true;
             this.mktTelefRepresentante.Enabled = true;
             this.cmbCredito.Enabled = true;
@@ -117,9 +167,10 @@ namespace pjPalmera.PL
         /// </summary>
         private void SetTooltipControls()
         {
-            toolTip1.SetToolTip(btnNuevo, "Nuevo Registro");
-            toolTip1.SetToolTip(btnGuardar, "Guardar Registro");
-            toolTip1.SetToolTip(btnCancelar, "Limpiar Campos");
+            this.toolTip1.SetToolTip(this.btnNuevo, "Nuevo Registro");
+            this.toolTip1.SetToolTip(this.btnGuardar, "Guardar Registro");
+            // this.toolTip1.SetToolTip(this.btnCancelar, "Cancelar el Proceso de Registro del Nuevo Proveedor");
+            this.toolTip1.SetToolTip(this.btnUpdate,"Actualizar Registro");
         }
 
         /// <summary>
@@ -127,21 +178,189 @@ namespace pjPalmera.PL
         /// </summary>
         private void NewProveedor()
         {
-            if (proveedor == null)
+            var provider = new ProveedorEntity();
+            var number = this.txtRnc.Text;
+
+            if (number == string.Empty)
             {
-                proveedor = new ProveedorEntity();
+                MessageBox.Show("Indicar información Válida", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var verify = ProveedorBO.ProveedorExits(number);
 
-                proveedor.Rnc = this.txtRnc.Text;
-                proveedor.Nombre_proveedor = this.txtNomProveedor.Text;
-                proveedor.Nombre_contacto = this.txtNomRepresentante.Text;
-                proveedor.Tel_contacto = this.mktTelefRepresentante.Text;
-                proveedor.Direccion_fab = this.txtDirProveedor.Text;
-                proveedor.Limitecredito =Convert.ToDecimal (this.mktLimiteCredito.Text);
-                proveedor.Tel_proveedor = this.mktTelefono.Text;
+                if (verify == false)
+                {
+                    try
+                    {
+                        if (!validator())
+                          return;
 
-                ProveedorBO.Save(proveedor);
+                       // var proveedor = new ProveedorEntity();
+
+                        if (proveedor == null)
+                        {
+                            provider.Rnc = Convert.ToInt64(this.txtRnc.Text);
+                            provider.Nombre_proveedor = this.txtNomProveedor.Text;
+                            provider.Nombre_contacto = this.txtNomRepresentante.Text;
+                            provider.Tel_contacto = this.mktTelefRepresentante.Text;
+                            provider.Direccion_prob = this.txtDirProveedor.Text;
+
+                            if (this.cmbCredito.Text == "No")
+                            {
+                                this.mktLimiteCredito.Text = "0.00";
+                            }
+
+                            provider.Limitecredito = Convert.ToDecimal(this.mktLimiteCredito.Text);
+                            provider.Tel_proveedor = this.mktTelefono.Text;
+                            provider.Createby = int.Parse(this.txtIdUser.Text);
+
+                            ProveedorBO.Create(provider);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    //finally
+                    //{
+                    //   MessageBox.Show("Verificar la informaciones suminstradas he intentar nuevamente", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //    this.txtRnc.Focus();
+                    //}
+                }
+                else if (verify == true)
+                {
+                    MessageBox.Show(ProveedorBO.strMessage, "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    this.txtRnc.Focus();
+                }
+
             }
 
+        }
+
+        /// <summary>
+        /// Validator Content inside the Controls
+        /// </summary>
+        /// <returns></returns>
+        private bool validator()
+        {
+            bool result = true;
+
+            if (this.txtRnc.Text == string.Empty)
+            {
+                MessageBox.Show("Introducir el RNC del Proveedor", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.txtRnc.Focus();
+                return result = false;
+            }
+            else if (this.txtNomProveedor.Text == string.Empty)
+            {
+                MessageBox.Show("Indicar el Nombre de la Empresa", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return result = false;
+            }
+            else if (this.txtDirProveedor.Text == string.Empty)
+            {
+                MessageBox.Show("Introducir la Dirección del Proveedor", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return result = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Update Proveedor Information
+        /// </summary>
+        private void UpdateProveedor()
+        {
+            var provider = new ProveedorEntity();
+
+            try
+            {
+                if (provider != null)
+                {
+                    provider.Idproveedor = Convert.ToInt32(this.txtIdProveedor.Text);
+                    provider.Rnc = Convert.ToInt64(this.txtRnc.Text);
+                    provider.Nombre_proveedor = this.txtNomProveedor.Text;
+                    provider.Nombre_contacto = this.txtNomRepresentante.Text;
+                    provider.Tel_contacto = this.mktTelefRepresentante.Text;
+                    provider.Direccion_prob = this.txtDirProveedor.Text;
+                    provider.Limitecredito = Convert.ToDecimal(this.mktLimiteCredito.Text);
+                    provider.Tel_proveedor = this.mktTelefono.Text;
+
+                    ProveedorBO.Update(provider);
+                    this.Hide();
+                }
+                else 
+                {
+                    this.Hide();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+           
+
+        }
+
+        private void cmbCredito_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbCredito.Text == "Si")
+            {
+                this.mktLimiteCredito.Enabled = true;
+                this.mktLimiteCredito.Focus();
+            }
+
+            if (this.cmbCredito.Text == "No")
+            {
+                this.mktLimiteCredito.Enabled = false;
+                return;
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            var number = this.txtRnc.Text;
+
+            if (number == string.Empty)
+            {
+                MessageBox.Show("Indicar información válida.", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.txtRnc.Focus();
+            }
+            else
+            {
+                var verify = ProveedorBO.ProveedorExits(number);
+                var Question = new DialogResult();
+
+                switch (verify)
+                {
+                    case false:
+
+                        MessageBox.Show(ProveedorBO.strMessage, "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        this.txtRnc.Focus();
+
+                        break;
+
+                    case true:
+                       
+                            Question = MessageBox.Show("Seguro desea Guardar los Cambios Realizados", "Mensaje del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (Question == DialogResult.Yes)
+                        {
+                            UpdateProveedor();
+                            cProveedor.dgvContProveedor.DataSource = ProveedorBO.GetAllProveedor();
+                            this.Close();
+                        }
+                        else if (Question == DialogResult.No)
+                        {
+                            this.Close();
+                            cProveedor.dgvContProveedor.DataSource = null;
+                            cProveedor.dgvContProveedor.DataSource = ProveedorBO.GetAllProveedor();
+                            return;
+                        }
+                        break;
+                }
+            }
         }
     }
             

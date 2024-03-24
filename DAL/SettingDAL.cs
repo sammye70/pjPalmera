@@ -10,17 +10,27 @@ using MySql.Data.MySqlClient;
 
 namespace pjPalmera.DAL
 {
+    /// <summary>
+    /// Setting Persisten DataBase
+    /// </summary>
     public class SettingDAL
     {
-        /// <summary>
-        /// Author: Samuel Estrella
-        /// StringConnection
-        /// Version: 1.0
-        /// Create Date:20/12/2019
-        /// Modificated: 
-        /// </summary>
-        static String ConnectionString = @"server=192.168.8.143;port=3306;uid=usr;pwd=Abeja30$;database=ebgsolut_abejas;";
-       // static String ConnectionString = @"server=192.168.8.163;port=3306;uid=toor;pwd=Abeja30$;database=ebgsolut_abejas;";
+        #region Connetion Pool
+        ///----------------------------------------------------------------------------------------------------------------------- //
+        /// Author: Samuel Estrella                                                                                               //
+        /// StringConnection                                                                                                      //
+        /// Version: 1.0                                                                                                          //
+        /// Create Date:20/12/2019                                                                                  //
+        /// Modificated Date:                                                                                            //
+        /// ------------------------------------------------------------------------------------------------------ //
+        /// 
+
+        private static readonly string ConnectionString = @"server=10.0.0.22;port=3306;uid=usr;pwd=Abeja30$;database=ebgsolut_abejas"; //Home dev last;
+
+        // private static readonly String ConnectionString = @"server=localhost;port=3306;uid=usr;pwd=Abeja30$;database=ebgsolut_abejas;"; // Drog Store ip
+
+        // private static readonly String ConnectionString = @"server=192.168.8.124;port=3306;uid=usr;pwd=Abeja30$;database=ebgsolut_abejas_last"; //Home dev
+
         /// <summary>
         /// ConnectionString to Databases
         /// </summary>
@@ -29,7 +39,7 @@ namespace pjPalmera.DAL
             get { return ConnectionString; }
         }
 
-        #region
+        #region Old Method
         //    public void Connect()
         //    {
         //        try
@@ -52,6 +62,7 @@ namespace pjPalmera.DAL
 
         //    }
         //}
+        #endregion 
         #endregion
     }
 }
